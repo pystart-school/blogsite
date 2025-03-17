@@ -43,3 +43,16 @@ Once the virtual environment is activated, install all necessary dependencies li
 
 pip install -r requirements.txt
 Note: The requirements.txt file contains all the necessary libraries for the project. Make sure to install them before running the project.
+
+
+## Running the Development Server
+
+### 1. Apply migrations to set up the database:
+python manage.py migrate
+
+### 2. Create a superuser for the admin panel:
+python manage.py createsuperuser
+
+### 3. Start the development server:
+python manage.py runserver
+You can now access the site at http://127.0.0.1:8000/.
