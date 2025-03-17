@@ -21,7 +21,7 @@ Before running this project, make sure you have **Python** installed.
 ## 📂 Project Setup
 
 ### 1. Clone the Repository
-git clone https://github.com/your-username/blogsite.git
+git clone 'repository_name' 
 cd blogsite
 
 ### 2. Create a Virtual Environment
