@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>My Blog</title>
-    </head>
-    <body>
-        <h1>Blog Posts</h1>
-        {% for post in posts %}
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <hr>
-        {% empty %}
-            <p>No posts yet.</p>
-        {% endfor %}
-        <a href="{% url 'post_create' %}">Create new post</a>
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block title %}All Posts{% endblock %}
+
+{% block content %}
+    <h2>All Blog Posts</h2>
+
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h3><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h3>
+                    <p>{{ post.body|truncatewords:30 }}</p>
+                    <p><strong>Posted on:</strong> {{ post.created_at }}</p>
+                    <a href="{% url 'post_edit' post.pk %}"><button>Edit</button></a>
+                    <a href="{% url 'post_delete' post.pk %}"><button>Delete</button></a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts available.</p>
+    {% endif %}
+{% endblock %}

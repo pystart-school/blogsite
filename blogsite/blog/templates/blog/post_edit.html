@@ -1,13 +1,13 @@
 {% extends 'blog/base.html' %}
 
-{% block title %}Create New Post{% endblock %}
+{% block title %}Edit Post{% endblock %}
 
 {% block content %}
-    <h2>Create New Blog Post</h2>
+    <h2>Edit Blog Post</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">📝 Create Post</button>
+        <button type="submit">✏️ Update Post</button>
     </form>
     <br>
     <a href="{% url 'post_list' %}">← Back to All Posts</a>

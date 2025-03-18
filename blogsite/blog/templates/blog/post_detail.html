@@ -1,3 +1,15 @@
-<h1>{{ post.title }}</h1>
-<p>{{ post.content }}</p>
-<a href="{% url 'post_list' %}">Back to Posts</a>
+{% extends 'blog/base.html' %}
+
+{% block title %}Post Detail{% endblock %}
+
+{% block content %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+    <p><strong>Posted on:</strong> {{ post.created_at }}</p>
+    <p><strong>Last Updated:</strong> {{ post.updated_at }}</p>
+
+    <a href="{% url 'post_edit' post.pk %}"><button>Edit</button></a>
+    <a href="{% url 'post_delete' post.pk %}"><button>Delete</button></a>
+    <br>
+    <a href="{% url 'post_list' %}">← Back to All Posts</a>
+{% endblock %}
