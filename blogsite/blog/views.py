@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def post_list(request):
@@ -45,4 +48,35 @@ def post_delete(request, pk):
     return render(request, 'blog/post_delete.html', {'post': post})
 
 
+# Login view
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('post_list')  # Redirect to posts list
+    else:
+        form = AuthenticationForm()
 
+    return render(request, 'blog/login.html', {'form': form})
+
+# Logout view
+def user_logout(request):
+    logout(request)
+    return redirect('post_list')  # Redirect to post list after logout
+
+
+# User Registration view
+def user_register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('user_login')  # Redirect to login after successful registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'blog/register.html', {'form': form})
