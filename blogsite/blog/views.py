@@ -4,13 +4,15 @@ from .forms import PostForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 # Create your views here.
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'blog/post_list.html', {'posts': posts})
 
-
+@login_required
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -26,7 +28,7 @@ def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 
-
+@login_required
 def post_edit(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
@@ -39,7 +41,7 @@ def post_edit(request, pk):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 
-
+@login_required
 def post_delete(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
@@ -58,7 +60,9 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('post_list')  # Redirect to posts list
+                # Handle redirect manually
+                next_url = request.GET.get('next') or settings.LOGIN_REDIRECT_URL
+                return redirect(next_url)
     else:
         form = AuthenticationForm()
 
