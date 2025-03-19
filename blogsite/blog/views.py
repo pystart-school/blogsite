@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
+from django.http import HttpResponseForbidden
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
@@ -17,7 +18,9 @@ def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('post_list')
     else:
         form = PostForm()
@@ -30,24 +33,38 @@ def post_detail(request, pk):
 
 @login_required
 def post_edit(request, pk):
-    post = Post.objects.get(pk=pk)
-    if request.method == 'POST':
+    post = get_object_or_404(Post, pk=pk)
+
+    if post.author != request.user:
+        return HttpResponseForbidden("You are not allowed to edit this post.")
+
+    if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
+
     return render(request, 'blog/post_edit.html', {'form': form})
 
 
 @login_required
 def post_delete(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
+
+    # Check if the user is the author of the post
+    if post.author != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this post.")
+
+    # If the request method is POST, delete the post
     if request.method == 'POST':
         post.delete()
         return redirect('post_list')
+
+    # Otherwise, render the confirmation page
     return render(request, 'blog/post_delete.html', {'post': post})
+
 
 
 # Login view

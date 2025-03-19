@@ -11,9 +11,7 @@
                 <li>
                     <h3><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h3>
                     <p>{{ post.body|truncatewords:30 }}</p>
-                    <p><strong>Posted on:</strong> {{ post.created_at }}</p>
-                    <a href="{% url 'post_edit' post.pk %}"><button>Edit</button></a>
-                    <a href="{% url 'post_delete' post.pk %}"><button>Delete</button></a>
+                    <p>Written by {{ post.author.username }} on {{ post.created_at }}</p>
                 </li>
             {% endfor %}
         </ul>

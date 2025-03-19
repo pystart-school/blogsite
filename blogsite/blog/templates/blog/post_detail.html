@@ -5,11 +5,14 @@
 {% block content %}
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
-    <p><strong>Posted on:</strong> {{ post.created_at }}</p>
+    <p>Written by {{ post.author.username }} on {{ post.created_at }}</p>
     <p><strong>Last Updated:</strong> {{ post.updated_at }}</p>
 
-    <a href="{% url 'post_edit' post.pk %}"><button>Edit</button></a>
-    <a href="{% url 'post_delete' post.pk %}"><button>Delete</button></a>
+    <!-- Display edit and delete buttons only for the author and logged-in users -->
+    {% if user.is_authenticated and user == post.author %}
+        <a href="{% url 'post_edit' post.pk %}">Edit</a>
+        <a href="{% url 'post_delete' post.pk %}">Delete</a>
+    {% endif %}
     <br>
     <a href="{% url 'post_list' %}">← Back to All Posts</a>
 {% endblock %}
