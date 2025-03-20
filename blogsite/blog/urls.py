@@ -11,4 +11,6 @@ urlpatterns = [
     path('login/', views.user_login, name='user_login'),  # Custom login view
     path('logout/', views.user_logout, name='user_logout'),  # Custom logout view
     path('register/', views.user_register, name='register'),
+
+    path('change_email/', views.user_change_email, name='change_email'),
 ]

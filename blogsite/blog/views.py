@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 from django.http import HttpResponseForbidden
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from .forms import EmailChangeForm
 
 # Create your views here.
 def post_list(request):
@@ -28,8 +29,25 @@ def post_create(request):
 
 
 def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    post = get_object_or_404(Post, pk=pk)
+    comments = post.comments.all()  # Fetch all comments related to the post
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:  # Ensure the user is logged in to comment
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.post = post
+                comment.author = request.user
+                comment.save()
+                return redirect('post_detail', pk=post.pk)  # Redirect after comment submission
+        else:
+            return redirect('user_login')  # Redirect to login if the user is not authenticated
+    else:
+        form = CommentForm()
+
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+
 
 @login_required
 def post_edit(request, pk):
@@ -101,3 +119,15 @@ def user_register(request):
     else:
         form = UserCreationForm()
     return render(request, 'blog/register.html', {'form': form})
+
+
+@login_required
+def user_change_email(request):
+    if request.method == 'POST':
+        form = EmailChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')  # Or wherever you want
+    else:
+        form = EmailChangeForm(instance=request.user)
+    return render(request, 'blog/change_email.html', {'form': form})
