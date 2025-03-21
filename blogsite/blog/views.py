@@ -8,6 +8,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .forms import EmailChangeForm
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def post_list(request):
@@ -131,3 +134,13 @@ def user_change_email(request):
     else:
         form = EmailChangeForm(instance=request.user)
     return render(request, 'blog/change_email.html', {'form': form})
+
+
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'blog/change_password.html'
+    success_url = reverse_lazy('password_change_done')
+
+
+class CustomPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
+    template_name = 'blog/password_change_done.html'
+    success_url = reverse_lazy('home')
