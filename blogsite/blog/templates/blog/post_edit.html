@@ -3,12 +3,14 @@
 {% block title %}Edit Post{% endblock %}
 
 {% block content %}
+  <div class="edit-post-container">
     <h2>Edit Blog Post</h2>
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">✏️ Update Post</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="submit-button">✏️ Update Post</button>
     </form>
     <br>
-    <a href="{% url 'post_list' %}">← Back to All Posts</a>
+    <a href="{% url 'post_list' %}" class="back-link">← Back to All Posts</a>
+  </div>
 {% endblock %}

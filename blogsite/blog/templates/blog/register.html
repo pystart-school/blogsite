@@ -3,13 +3,15 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
+  <div class="form-container">
     <h2>Create a new account</h2>
-    
+
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-primary">Register</button>
     </form>
-    
-    <p>Already have an account? <a href="{% url 'user_login' %}">Login here</a></p>
+
+    <p>Already have an account? <a href="{% url 'user_login' %}" class="link-primary">Login here</a></p>
+  </div>
 {% endblock %}
