@@ -11,6 +11,7 @@ from .forms import EmailChangeForm
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CustomUserCreationForm  # Import the custom form
 
 # Create your views here.
 def post_list(request):
@@ -112,15 +113,14 @@ def user_logout(request):
     return redirect('post_list')  # Redirect to post list after logout
 
 
-# User Registration view
 def user_register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('user_login')  # Redirect to login after successful registration
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'blog/register.html', {'form': form})
 
 

@@ -5,7 +5,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/* Body Styling */
 body {
     background-color: #f9f9f9;
     color: #333;
@@ -21,9 +20,9 @@ body {
     padding: 20px;
 }
 
-/* Header Styling */
+/* Header */
 header {
-    background-color: #FF5722; /* Soft Orange */
+    background-color: #FF5722;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -39,10 +38,10 @@ header h1 a {
 }
 
 header h1 a:hover {
-    color: #ffe0b2; /* Light orange on hover */
+    color: #ffe0b2;
 }
 
-/* Navigation Bar */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: center;
@@ -64,7 +63,7 @@ header h1 a:hover {
     background-color: #e64a19;
 }
 
-/* Dropdown Menu */
+/* Dropdown */
 .dropdown {
     position: relative;
 }
@@ -110,14 +109,13 @@ header h1 a:hover {
     color: white;
 }
 
-/* Main Content Area */
+/* Main Content */
 main {
     margin: 40px 0;
     padding: 30px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
 }
 
 h2, h3 {
@@ -126,7 +124,7 @@ h2, h3 {
     font-weight: 600;
 }
 
-/* Form Styling */
+/* Form Container */
 .form-container {
     max-width: 600px;
     margin: 40px auto;
@@ -136,12 +134,43 @@ h2, h3 {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
 }
 
-form button {
+form label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+    color: #333;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    display: block;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #FF5722;
+    outline: none;
+}
+
+form button,
+.btn-primary {
     margin-top: 20px;
     padding: 12px;
     background-color: #FF5722;
@@ -153,56 +182,35 @@ form button {
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+form button:hover,
+.btn-primary:hover {
     background-color: #e64a19;
 }
 
-/* Form Inputs */
-form input, form select, form textarea {
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-}
-
-form input:focus, form select:focus, form textarea:focus {
-    border-color: #FF5722;
-    outline: none;
-}
-
-form input[type="submit"]:hover {
-    background-color: #e64a19;
-}
-
-/* Links */
-a {
+.link-primary {
     color: #FF5722;
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: 500;
-    transition: color 0.3s ease;
 }
 
-a:hover {
+.link-primary:hover {
     color: #e64a19;
 }
 
-/* Footer Styling */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    margin-top: 50px;
+/* Error Message Styling */
+ul.errorlist {
+    padding: 0;
+    margin: 0 0 10px 0;
+    list-style: none;
+    color: #d32f2f;
+    font-size: 0.9rem;
 }
 
-footer p {
-    margin: 0;
+ul.errorlist li {
+    margin-bottom: 5px;
 }
 
-/* Post List Styling */
+/* Posts List */
 ul {
     list-style: none;
 }
@@ -229,7 +237,7 @@ ul li p {
     font-size: 1rem;
 }
 
-/* Comments Section */
+/* Comments */
 .comments {
     margin-top: 30px;
     padding: 20px;
@@ -250,6 +258,75 @@ ul li p {
     margin-bottom: 10px;
     color: #555;
 }
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* Flash Messages Styling */
+.message-container {
+    margin: 20px auto;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    position: relative;
+    border-left: 5px solid;
+}
+
+/* Success Message */
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-color: #4caf50;
+}
+
+/* Error Message */
+.alert-error, .alert-danger {
+    background-color: #fdecea;
+    color: #c62828;
+    border-color: #f44336;
+}
+
+/* Info Message */
+.alert-info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border-color: #2196f3;
+}
+
+/* Warning Message */
+.alert-warning {
+    background-color: #fff3e0;
+    color: #ef6c00;
+    border-color: #ff9800;
+}
+
+/* Error Message Styling */
+.form-error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
