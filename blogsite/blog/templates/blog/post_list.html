@@ -12,7 +12,7 @@
           <li class="post-item">
             <h3><a href="{% url 'post_detail' post.pk %}" class="post-title">{{ post.title }}</a></h3>
             <p class="post-excerpt">{{ post.body|truncatewords:30 }}</p>
-            <p class="post-meta">Written by {{ post.author.username }} on {{ post.created_at }}</p>
+            <p class="post-meta">Written by {{ post.author.username|capfirst }} on {{ post.created_at }}</p>
           </li>
         {% endfor %}
       </ul>
