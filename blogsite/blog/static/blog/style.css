@@ -22,9 +22,9 @@ body {
 
 /* Header */
 header {
-    background-color: #FF5722;
+    background-color: #e75f42;
     color: white;
-    height: 120px; /* Set the height of the header */
+    height: 130px; /* Set the height of the header */
     padding: 20px 0;
     display: flex;
     justify-content: space-between; /* Align left (logo) and right (navbar) */
@@ -42,7 +42,7 @@ header h1 a {
 }
 
 header h1 a:hover {
-    color: #ffe0b2;
+    color: #b83216;
 }
 
 /* Navbar */
@@ -72,7 +72,7 @@ header h1 a:hover {
 }
 
 .dropbtn {
-    background-color: #FF5722;
+    background-color: #e75f42;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -109,7 +109,7 @@ header h1 a:hover {
 }
 
 .dropdown-content a:hover {
-    background-color: #FF5722;
+    background-color: #e64a19;
     color: white;
 }
 
@@ -169,7 +169,7 @@ form textarea {
 form input:focus,
 form select:focus,
 form textarea:focus {
-    border-color: #FF5722;
+    border-color: #e75f42;
     outline: none;
 }
 
@@ -177,7 +177,7 @@ form button,
 .btn-primary {
     margin-top: 20px;
     padding: 12px;
-    background-color: #FF5722;
+    background-color: #e75f42;
     color: white;
     font-size: 1rem;
     border: none;
@@ -192,7 +192,7 @@ form button:hover,
 }
 
 .link-primary {
-    color: #FF5722;
+    color: #e75f42;
     text-decoration: underline;
     font-weight: 500;
 }
@@ -241,9 +241,13 @@ ul li p {
     font-size: 1rem;
 }
 
+.post-content {
+    margin-bottom: 20px; /* Adds space between the post content and the comments section */
+}
+
 /* Comments */
 .comments {
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
