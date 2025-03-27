@@ -198,7 +198,7 @@ form button:hover,
 }
 
 .link-primary:hover {
-    color: #e64a19;
+    color: #b83216;
 }
 
 /* Error Message Styling */
@@ -243,6 +243,17 @@ ul li p {
 
 .post-content {
     margin-bottom: 20px; /* Adds space between the post content and the comments section */
+}
+
+.post-title {
+    color: #e75f42; /* Post title color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make it bold */
+}
+
+.post-title:hover {
+    color: #b83216; /* Hover color */
+    text-decoration: underline; /* Add underline on hover */
 }
 
 /* Comments */
@@ -332,6 +343,10 @@ footer p {
     font-size: 0.9rem;
     margin-top: 5px;
     display: block;
+}
+
+.centered {
+    text-align: center;
 }
 
 /* Responsive Design */
