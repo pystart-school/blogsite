@@ -73,9 +73,10 @@ header h1 a:hover {
     color: white;
     border: none;
     padding: 12px 20px;
-    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 1.1rem; /* Match Home & Create Post */
+    font-weight: bold;  /* Make it bold like the others */
 }
 
 .dropbtn:hover {
