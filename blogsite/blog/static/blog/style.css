@@ -24,9 +24,13 @@ body {
 header {
     background-color: #FF5722;
     color: white;
+    height: 120px; /* Set the height of the header */
     padding: 20px 0;
-    text-align: center;
+    display: flex;
+    justify-content: space-between; /* Align left (logo) and right (navbar) */
+    align-items: center; /* Vertically center the content */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0 20px; /* Added padding to give some space from the edges */
 }
 
 header h1 a {
@@ -44,9 +48,8 @@ header h1 a:hover {
 /* Navbar */
 .navbar {
     display: flex;
-    justify-content: center;
     gap: 30px;
-    margin-top: 10px;
+    align-items: center; /* Align items vertically */
 }
 
 .navbar a {
@@ -273,7 +276,6 @@ footer p {
     margin: 0;
 }
 
-
 /* Flash Messages Styling */
 .message-container {
     margin: 20px auto;
@@ -327,7 +329,6 @@ footer p {
     margin-top: 5px;
     display: block;
 }
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
