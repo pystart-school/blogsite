@@ -20,7 +20,8 @@
                     <a href="{% url 'post_create' %}">Create Post</a>
 
                     <div class="dropdown">
-                        <button class="dropbtn">Account Settings ▾</button>
+                        <!-- Change Account Settings to display "Hi, Username" -->
+                        <button class="dropbtn">Hi, {{ user.username|capfirst }} ▾</button>
                         <div class="dropdown-content">
                             <a href="{% url 'change_email' %}">Change Email</a>
                             <a href="{% url 'change_password' %}">Change Password</a>
