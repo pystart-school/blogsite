@@ -9,8 +9,8 @@
 
     {% if user == post.author %}
       <div class="post-actions">
-        <a href="{% url 'post_edit' post.pk %}" class="edit-button">✏️ Edit</a> |
-        <a href="{% url 'post_delete' post.pk %}" class="delete-button">🗑 Delete</a>
+        <a href="{% url 'post_edit' post.pk %}" class="link-primary">✏️ Edit</a> |
+        <a href="{% url 'post_delete' post.pk %}" class="link-primary">🗑 Delete</a>
       </div>
     {% endif %}
 
