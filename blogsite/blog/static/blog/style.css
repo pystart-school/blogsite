@@ -245,9 +245,6 @@ ul li p {
     width: 900px;  /* Fixed width */
     max-width: 90%; /* Ensures responsiveness */
     margin: 0 auto;  /* Centers the container */
-    padding: 20px;
-    background-color: #fff; /* Optional: for better visibility */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow */
 }
 
 .post-content {
