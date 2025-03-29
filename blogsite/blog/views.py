@@ -12,6 +12,7 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CustomUserCreationForm  # Import the custom form
+from django.contrib import messages
 
 # Create your views here.
 def post_list(request):
@@ -26,7 +27,10 @@ def post_create(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            messages.success(request, "Post created successfully!")
             return redirect('post_list')
+        else:
+            messages.error(request, "Error creating post. Please check the form.")
     else:
         form = PostForm()
     return render(request, 'blog/post_create.html', {'form': form})
@@ -64,7 +68,10 @@ def post_edit(request, pk):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "Post updated successfully!")
             return redirect('post_detail', pk=post.pk)
+        else:
+            messages.error(request, "Error updating post.")
     else:
         form = PostForm(instance=post)
 
@@ -82,6 +89,7 @@ def post_delete(request, pk):
     # If the request method is POST, delete the post
     if request.method == 'POST':
         post.delete()
+        messages.success(request, "Post deleted successfully!")
         return redirect('post_list')
 
     # Otherwise, render the confirmation page
@@ -99,6 +107,7 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request, f"Welcome, {username.capitalize()}! You have successfully logged in.")
                 # Handle redirect manually
                 next_url = request.GET.get('next') or settings.LOGIN_REDIRECT_URL
                 return redirect(next_url)
@@ -110,6 +119,7 @@ def user_login(request):
 # Logout view
 def user_logout(request):
     logout(request)
+    messages.success(request, "You have successfully logged out.")
     return redirect('post_list')  # Redirect to post list after logout
 
 
@@ -118,7 +128,10 @@ def user_register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Registration successful! You can now log in.")
             return redirect('user_login')  # Redirect to login after successful registration
+        else:
+            messages.error(request, "Registration failed. Please check the form.")
     else:
         form = CustomUserCreationForm()
     return render(request, 'blog/register.html', {'form': form})
