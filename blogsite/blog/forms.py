@@ -24,6 +24,10 @@ class EmailChangeForm(forms.ModelForm):
         model = User
         fields = ['email']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].required = True  # Make the email field required
+
         
 class CommentForm(forms.ModelForm):
     class Meta:
