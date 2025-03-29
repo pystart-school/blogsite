@@ -146,7 +146,7 @@ def user_change_email(request):
             messages.success(request, 'Your email address has been successfully updated.')
             return redirect('post_list')  # Or wherever you want
         else:
-             messages.error(request, 'There was an error updating your email address. Please try again.')
+            messages.error(request, 'There was an error updating your email address. Please try again.')
     else:
         form = EmailChangeForm(instance=request.user)
     return render(request, 'blog/change_email.html', {'form': form})
