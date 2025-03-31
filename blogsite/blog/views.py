@@ -13,6 +13,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CustomUserCreationForm  # Import the custom form
 from django.contrib import messages
+from django.contrib.auth.views import PasswordResetView
+from .forms import CustomPasswordResetForm
+
 
 # Create your views here.
 def post_list(request):
@@ -160,3 +163,9 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 class CustomPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'blog/password_change_done.html'
     success_url = reverse_lazy('home')
+
+
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
+    success_url = reverse_lazy('password_reset_done')  # Redirect after submission
+    template_name = 'blog/password_reset_form.html'  # Ensure this template exists
