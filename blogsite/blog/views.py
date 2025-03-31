@@ -121,9 +121,13 @@ def user_login(request):
 
 # Logout view
 def user_logout(request):
-    logout(request)
-    messages.success(request, "You have successfully logged out.")
-    return redirect('post_list')  # Redirect to post list after logout
+    if request.user.is_authenticated:  # Check if the user is logged in
+        logout(request)
+        messages.success(request, "You have successfully logged out.")
+    else:
+        messages.info(request, "You are not logged in.")  # Inform the user they weren't logged in
+
+    return redirect('post_list')  # Redirect to post list after logout or if already logged out
 
 
 def user_register(request):
